@@ -13,11 +13,12 @@ export class ViewService implements OnModuleInit {
     try {
       this.server = createServer({
         dev: this.configService.get<string>('NODE_ENV') !== 'production',
-        dir: './src/client',
+        dir: './src/next',
       });
       await this.server.prepare();
     } catch (error) {
-      console.error(error);
+      const formattedError = JSON.stringify(error, null, 2)
+      console.error("[view.service error]: \n" +formattedError);
     }
   }
 
